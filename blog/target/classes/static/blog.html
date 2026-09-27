@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Article</title>
+
+    <link rel="stylesheet"
+          href="/css/style.css">
+        
+
+</head>
+
+<body>
+
+    <main class="single-blog-container">
+
+        <article id="singleBlog">
+
+            <p>Loading article...</p>
+
+        </article>
+
+    </main>
+
+
+    <script>
+
+        async function loadBlog() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const id =
+                params.get("id");
+
+            const container =
+                document.getElementById(
+                    "singleBlog"
+                );
+
+            if (!id) {
+
+                container.innerHTML = `
+                    <h2>Article not found</h2>
+                    <p>No article ID was provided.</p>
+                `;
+
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/posts/${id}`
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Could not load article"
+                    );
+                }
+
+                const blog =
+                    await response.json();
+
+
+                document.title =
+                    blog.title || "Article";
+
+
+                container.innerHTML = `
+
+                    <div class="single-blog-category">
+                        ${escapeHtml(
+                            blog.category ||
+                            "General"
+                        )}
+                    </div>
+
+
+                    <h1 class="single-blog-title">
+                        ${escapeHtml(
+                            blog.title ||
+                            "Untitled Article"
+                        )}
+                    </h1>
+
+
+                    <div class="single-blog-meta">
+
+                        <span>
+                            By
+                            ${
+                                escapeHtml(
+                                    blog.author?.fullName ||
+                                    blog.author?.username ||
+                                    "Author"
+                                )
+                            }
+                        </span>
+
+                        <span>
+                            ${
+                                blog.createdAt
+                                    ? new Date(
+                                        blog.createdAt
+                                      ).toLocaleDateString()
+                                    : ""
+                            }
+                        </span>
+
+                    </div>
+
+
+                    ${
+                        blog.coverImage
+                            ? `
+                                <img
+                                    src="${escapeAttribute(
+                                        blog.coverImage
+                                    )}"
+                                    class="single-blog-image"
+                                    alt="${escapeAttribute(
+                                        blog.title || "Article"
+                                    )}">
+                              `
+                            : ""
+                    }
+
+
+                    <div class="single-blog-content">
+
+                        ${
+                            blog.content ||
+                            "<p>No content available.</p>"
+                        }
+
+                    </div>
+
+
+                    <div class="single-blog-actions">
+
+                        <button
+                            onclick="history.back()">
+                            ← Back
+                        </button>
+
+                    </div>
+
+                `;
+
+            } catch (error) {
+
+                console.error(
+                    "Article loading error:",
+                    error
+                );
+
+                container.innerHTML = `
+
+                    <div class="blog-error">
+
+                        <h2>
+                            Unable to load article
+                        </h2>
+
+                        <p>
+                            Please make sure the
+                            backend is running.
+                        </p>
+
+                        <button
+                            onclick="history.back()">
+                            Go Back
+                        </button>
+
+                    </div>
+
+                `;
+            }
+        }
+
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        function escapeAttribute(value) {
+
+            return escapeHtml(value);
+        }
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            loadBlog
+        );
+
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const focusButton = document.getElementById("focusModeButton");
+
+    if (focusButton) {
+        focusButton.addEventListener("click", function () {
+
+            document.body.classList.toggle("focus-mode");
+
+            if (document.body.classList.contains("focus-mode")) {
+                focusButton.textContent = "✕";
+                focusButton.title = "Exit focus reading mode";
+            } else {
+                focusButton.textContent = "◐";
+                focusButton.title = "Focus reading mode";
+            }
+
+        });
+    }
+
+});
+</script>
+
+</body>
+
+</html>
+

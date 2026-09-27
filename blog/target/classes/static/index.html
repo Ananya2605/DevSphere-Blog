@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>DevSphere | Ideas That Move Technology</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<!-- Background -->
+
+<div class="background-orb orb-one"></div>
+<div class="background-orb orb-two"></div>
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<header class="navbar">
+
+<a href="/" class="brand">
+    <span class="brand-mark">D</span>
+    <span>
+        Dev<span class="brand-highlight">Sphere</span>
+    </span>
+</a>
+
+<nav class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#discover">Discover</a>
+    <a href="#featured">Featured</a>
+</nav>
+
+<div class="nav-actions">
+
+    <button
+        class="icon-button"
+        id="focusModeButton"
+        title="Focus reading mode"
+        type="button"
+    >
+        ◐
+    </button>
+
+    <a href="login.html" class="nav-login" id="loginLink">
+        <span id="loggedInUsername"></span>
+    </a>
+
+    <a href="create-post.html" class="primary-button">
+        Write Post
+    </a>
+
+</div>
+
+
+</header>
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main id="home">
+
+<!-- ==========================================
+     HERO SECTION
+========================================== -->
+
+<section class="hero-section">
+
+
+<div class="hero-content">
+
+    <div class="eyebrow">
+        <span class="live-dot"></span>
+        A space for curious minds
+    </div>
+
+    <h1>
+        Ideas that make
+        <span>technology human.</span>
+    </h1>
+
+    <p>
+        Explore thoughtful stories about software, development,
+        artificial intelligence, productivity, and the future of technology.
+    </p>
+
+    <div class="hero-actions">
+
+        <a
+            href="#discover"
+            class="primary-button large-button"
+        >
+            Explore Articles →
+        </a>
+
+        <a
+            href="register.html"
+            class="secondary-button"
+        >
+            Join the community
+        </a>
+
+    </div>
+
+
+    <!-- Hero Stats -->
+
+    <div class="hero-stats">
+
+        <div>
+            <strong id="postCount">0</strong>
+            <span>Articles</span>
+        </div>
+
+        <div>
+            <strong>100%</strong>
+            <span>Curiosity</span>
+        </div>
+
+        <div>
+            <strong>24/7</strong>
+            <span>Learning</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Hero Visual -->
+
+<div class="hero-visual">
+
+    <div class="floating-card card-top">
+
+        <span class="mini-icon">✦</span>
+
+        <div>
+            <strong>Fresh ideas</strong>
+            <small>Updated regularly</small>
+        </div>
+
+    </div>
+
+
+    <div class="hero-orbit">
+
+        <div class="orbit-ring ring-one"></div>
+        <div class="orbit-ring ring-two"></div>
+
+        <div class="center-symbol">
+            <span>&lt;/&gt;</span>
+        </div>
+
+        <span class="orbit-tag tag-one">Java</span>
+        <span class="orbit-tag tag-two">AI</span>
+        <span class="orbit-tag tag-three">Web</span>
+        <span class="orbit-tag tag-four">Cloud</span>
+
+    </div>
+
+
+    <div class="floating-card card-bottom">
+
+        <span class="mini-icon">☄</span>
+
+        <div>
+            <strong>Build. Learn. Share.</strong>
+            <small>One post at a time</small>
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- ==========================================
+     FEATURED ARTICLE
+========================================== -->
+
+<section class="featured-section" id="featured">
+
+
+<div class="section-heading">
+
+    <div>
+        <span class="section-label">EDITOR'S PICK</span>
+        <h2>Featured insight</h2>
+    </div>
+
+    <span class="section-description">
+        One idea worth your attention.
+    </span>
+
+</div>
+
+
+<article
+    class="featured-card"
+    id="featuredPost"
+>
+
+    <div class="featured-content">
+
+        <span class="post-badge">
+            Featured article
+        </span>
+
+        <h3 id="featuredTitle">
+            Discovering meaningful ideas...
+        </h3>
+
+        <p id="featuredExcerpt">
+            Loading the latest featured article from the community.
+        </p>
+
+
+        <div class="featured-footer">
+
+            <span id="featuredAuthor">
+                By DevSphere
+            </span>
+
+            <button
+                class="text-button"
+                id="featuredReadButton"
+                type="button"
+            >
+                Read article →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="featured-pattern">
+        <span>{</span>
+        <span>/</span>
+        <span>&gt;</span>
+        <span>_</span>
+    </div>
+
+</article>
+
+
+</section>
+
+<!-- ==========================================
+     DISCOVER / SEARCH
+========================================== -->
+
+<section
+    class="discover-section"
+    id="discover"
+>
+
+
+<div class="section-heading">
+
+    <div>
+        <span class="section-label">
+            THE LIBRARY
+        </span>
+
+        <h2>
+            Discover something new
+        </h2>
+    </div>
+
+    <p class="section-description">
+        Search, explore, and save the stories you love.
+    </p>
+
+</div>
+
+
+<!-- Search + Categories -->
+
+<div class="discover-toolbar">
+
+    <div class="search-wrapper">
+
+        <span>⌕</span>
+
+        <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search articles..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="category-buttons">
+
+    <button class="category-btn active" data-category="all" type="button">
+        All
+    </button>
+
+    <button class="category-btn" data-category="AI" type="button">
+        AI
+    </button>
+
+    <button class="category-btn" data-category="Java" type="button">
+        Java
+    </button>
+
+    <button class="category-btn" data-category="Python" type="button">
+        Python
+    </button>
+
+    <button class="category-btn" data-category="Web Development" type="button">
+        Web Development
+    </button>
+
+    <button class="category-btn" data-category="Data Science" type="button">
+        Data Science
+    </button>
+
+    <button class="category-btn" data-category="ML" type="button">
+        ML
+    </button>
+
+    <button class="category-btn" data-category="C" type="button">
+        C
+    </button>
+
+    <button class="category-btn" data-category="C++" type="button">
+        C++
+    </button>
+
+    <button class="category-btn" data-category="Spring Boot" type="button">
+        Spring Boot
+    </button>
+
+    <button class="category-btn" data-category="JavaScript" type="button">
+        JavaScript
+    </button>
+
+    <button class="category-btn" data-category="SQL" type="button">
+        SQL
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     LATEST ARTICLES
+========================================== -->
+
+<section class="articles-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                DEVSPHERE LIBRARY
+            </span>
+
+            <h2>
+                Latest Articles
+            </h2>
+
+            <p>
+                Explore ideas, tutorials and experiences
+                from the developer community.
+            </p>
+
+        </div>
+
+
+        <a
+            href="create-post.html"
+            class="write-btn"
+        >
+            + Write Article
+        </a>
+
+    </div>
+
+
+    <!-- Articles will be loaded here -->
+
+    <div
+        id="articlesContainer"
+        class="articles-grid"
+    >
+
+        <div class="articles-loading">
+            Loading articles...
+        </div>
+
+    </div>
+
+</section>
+
+
+</section>
+
+</main>
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="js/user.js"></script>
+<script src="js/app.js"></script>
+<script src="js/blog-list.js"></script>
+
+</body>
+</html>

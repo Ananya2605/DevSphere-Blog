@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Write Article | DevSphere</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .editor-page {
+            max-width: 900px;
+            margin: 70px auto;
+        }
+
+        .editor-header {
+            margin-bottom: 35px;
+        }
+
+        .editor-header h1 {
+            margin-top: 10px;
+            font-family: "Space Grotesk";
+            font-size: 3rem;
+        }
+
+        .editor-header p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .editor-card {
+            padding: 35px;
+
+            border: 1px solid var(--border);
+            border-radius: 25px;
+
+            background: var(--card);
+
+            box-shadow: var(--shadow);
+        }
+
+        .editor-group {
+            margin-bottom: 22px;
+        }
+
+        .editor-group label {
+            display: block;
+            margin-bottom: 9px;
+
+            color: #d8dbea;
+
+            font-size: .82rem;
+            font-weight: 600;
+        }
+
+        .editor-group input,
+        .editor-group textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            outline: none;
+
+            color: white;
+            background: rgba(255,255,255,.035);
+        }
+
+        .editor-group textarea {
+            min-height: 350px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .editor-group input:focus,
+        .editor-group textarea:focus {
+            border-color: rgba(139,124,255,.6);
+        }
+
+        .publish-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding-top: 10px;
+        }
+
+        .publish-check {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        .editor-message {
+            margin-top: 15px;
+            color: var(--success);
+        }
+
+        @media(max-width:600px) {
+
+            .editor-page {
+                margin: 40px auto;
+            }
+
+            .editor-card {
+                padding: 22px;
+            }
+
+            .editor-header h1 {
+                font-size: 2.3rem;
+            }
+
+            .publish-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/" class="brand">
+
+        <span class="brand-mark">
+            D
+        </span>
+
+        <span>
+            Dev<span class="brand-highlight">
+                Sphere
+            </span>
+        </span>
+
+    </a>
+
+    <div class="nav-actions">
+
+        <a href="/" class="nav-login">
+            ← Home
+        </a>
+
+    </div>
+
+</header>
+
+<main class="editor-page">
+
+    <div class="editor-header">
+
+        <span class="section-label">
+            CREATE
+        </span>
+<div class="create-post-container">
+
+    <h1>Create New Blog</h1>
+
+    <!-- Title -->
+    <div class="form-group">
+        <label>Blog Title</label>
+        <input type="text" id="postTitle"
+               placeholder="Enter your blog title">
+    </div>
+
+    <!-- Category -->
+    <div class="form-row">
+
+        <div class="form-group">
+            <label>Category</label>
+            <select id="postCategory">
+                <option value="Technology">Technology</option>
+                <option value="Programming">Programming</option>
+                <option value="Java">Java</option>
+                <option value="Spring Boot">Spring Boot</option>
+                <option value="AI">AI</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Career">Career</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tags</label>
+            <input type="text" id="postTags"
+                   placeholder="Java, Spring Boot, Backend">
+        </div>
+
+    </div>
+
+
+    <!-- Cover Image -->
+    <div class="form-group">
+        <label>Cover Image URL</label>
+
+        <input type="url"
+               id="coverImage"
+               placeholder="https://example.com/image.jpg">
+
+        <small>
+            Paste an image URL for your blog cover.
+        </small>
+    </div>
+
+
+    <!-- Editor -->
+    <div class="form-group">
+
+        <label>Write Your Blog</label>
+
+        <div class="editor-toolbar">
+
+            <button type="button" onclick="formatText('bold')">
+                <b>B</b>
+            </button>
+
+            <button type="button" onclick="formatText('italic')">
+                <i>I</i>
+            </button>
+
+            <button type="button" onclick="formatText('underline')">
+                <u>U</u>
+            </button>
+
+            <button type="button"
+                    onclick="formatBlock('h2')">
+                H2
+            </button>
+
+            <button type="button"
+                    onclick="formatBlock('h3')">
+                H3
+            </button>
+
+            <button type="button"
+                    onclick="formatText('insertUnorderedList')">
+                • List
+            </button>
+
+            <button type="button"
+                    onclick="formatText('insertOrderedList')">
+                1. List
+            </button>
+
+            <button type="button"
+                    onclick="addLink()">
+                🔗 Link
+            </button>
+
+            <button type="button"
+                    onclick="addImage()">
+                🖼️ Image
+            </button>
+
+            <button type="button"
+                    onclick="addYoutube()">
+                🎥 YouTube
+            </button>
+
+            <button type="button"
+                    onclick="addQuote()">
+                ❝ Quote
+            </button>
+
+        </div>
+
+
+        <div id="blogEditor"
+             class="blog-editor"
+             contenteditable="true">
+
+            <p>Start writing your blog here...</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEO -->
+    <div class="seo-section">
+
+        <h3>SEO Settings</h3>
+
+        <div class="form-group">
+
+            <label>SEO Title</label>
+
+            <input type="text"
+                   id="seoTitle"
+                   placeholder="SEO title">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>SEO Description</label>
+
+            <textarea id="seoDescription"
+                      placeholder="Short description for search engines"></textarea>
+
+        </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <div class="post-actions">
+
+        <button class="draft-btn"
+                onclick="saveDraft()">
+            Save Draft
+        </button>
+
+        <button class="preview-btn"
+                onclick="previewBlog()">
+            Preview
+        </button>
+
+        <button class="publish-btn"
+                onclick="publishBlog()">
+            🚀 Publish Blog
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Preview Modal -->
+
+<div id="previewModal"
+     class="preview-modal">
+
+    <div class="preview-content">
+
+        <button class="close-preview"
+                onclick="closePreview()">
+            ×
+        </button>
+
+        <article id="previewArticle"></article>
+
+    </div>
+
+</div>
+
+
+
+    </section>
+
+</main>
+
+<script src="js/create-post.js"></script>
+
+</body>
+</html>

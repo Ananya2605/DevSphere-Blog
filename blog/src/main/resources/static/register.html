@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | DevSphere</title>
+
+    <link rel="stylesheet" href="css/auth.css">
+    
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Join DevSphere and start sharing your ideas.
+        </p>
+
+        <form id="registerForm">
+
+            <div class="input-group">
+                <label for="fullName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your Gmail"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    required
+                    minlength="6"
+                >
+            </div>
+
+            <button type="submit" id="registerBtn">
+                Create Account
+            </button>
+
+            <div id="authMessage" class="auth-message"></div>
+
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>

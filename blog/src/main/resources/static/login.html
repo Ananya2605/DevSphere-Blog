@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | DevSphere</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/auth.css">
+
+</head>
+
+<body>
+
+<div class="auth-background"></div>
+
+<main class="auth-container">
+
+    <a href="/" class="auth-brand">
+        <span class="brand-mark">D</span>
+        <span>Dev<span>Sphere</span></span>
+    </a>
+
+    <section class="auth-card">
+
+        <div class="auth-heading">
+
+            <span class="auth-label">
+                WELCOME BACK
+            </span>
+
+            <h1>
+                Continue your
+                <span>journey.</span>
+            </h1>
+
+            <p>
+                Sign in and continue discovering
+                ideas worth reading.
+            </p>
+
+        </div>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Sign In →
+            </button>
+
+        </form>
+
+        <div
+            class="auth-message"
+            id="authMessage"
+        ></div>
+
+        <div class="auth-divider">
+            <span>OR</span>
+        </div>
+
+        <p class="switch-auth">
+            Don't have an account?
+            <a href="register.html">
+                Create one
+            </a>
+        </p>
+
+    </section>
+
+    <a href="/" class="back-home">
+        ← Back to DevSphere
+    </a>
+
+</main>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>

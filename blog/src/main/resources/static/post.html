@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Article | DevSphere</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .article-page {
+            max-width: 850px;
+            margin: 90px auto;
+        }
+
+        .article-category {
+            color: var(--cyan);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .article-title {
+            margin-top: 18px;
+
+            font-family: "Space Grotesk";
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 20px;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .article-content {
+            margin-top: 60px;
+
+            color: #c8ccda;
+
+            font-size: 1.08rem;
+            line-height: 2;
+            white-space: pre-wrap;
+        }
+
+        .article-divider {
+            height: 1px;
+
+            margin: 60px 0;
+
+            background: var(--border);
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="/" class="brand">
+
+        <span class="brand-mark">
+            D
+        </span>
+
+        <span>
+            Dev<span class="brand-highlight">
+                Sphere
+            </span>
+        </span>
+
+    </a>
+
+    <div class="nav-actions">
+
+        <a href="/" class="nav-login">
+            ← All articles
+        </a>
+
+    </div>
+
+</header>
+
+<main class="article-page">
+
+    <span
+        class="article-category"
+        id="articleCategory"
+    >
+        ARTICLE
+    </span>
+
+    <h1
+        class="article-title"
+        id="articleTitle"
+    >
+        Loading...
+    </h1>
+
+    <div class="article-meta">
+
+        <span id="articleAuthor">
+            By DevSphere
+        </span>
+
+        <span>•</span>
+
+        <span id="articleDate">
+            —
+        </span>
+
+    </div>
+
+    <div
+        class="article-content"
+        id="articleContent"
+    >
+        Loading article...
+    </div>
+
+    <div class="article-divider"></div>
+
+    <div class="article-actions">
+
+        <button
+            class="secondary-button"
+            id="bookmarkArticle"
+        >
+            ☆ Save article
+        </button>
+
+        <a
+            href="/"
+            class="primary-button"
+        >
+            Explore more →
+        </a>
+
+    </div>
+
+</main>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<script>
+
+let currentPost = null;
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadArticle
+);
+
+
+async function loadArticle() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const id =
+        params.get("id");
+
+    if (!id) {
+
+        window.location.href = "/";
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(`/api/posts/${id}`);
+
+        if (!response.ok) {
+            throw new Error("Article not found");
+        }
+
+        currentPost =
+            await response.json();
+
+        displayArticle();
+
+    } catch (error) {
+
+        document.getElementById(
+            "articleTitle"
+        ).textContent =
+            "Article not found.";
+
+        document.getElementById(
+            "articleContent"
+        ).textContent =
+            "The article you're looking for does not exist.";
+    }
+}
+
+
+function displayArticle() {
+
+    document.getElementById(
+        "articleTitle"
+    ).textContent =
+        currentPost.title;
+
+    document.getElementById(
+        "articleContent"
+    ).textContent =
+        currentPost.content;
+
+    document.getElementById(
+        "articleAuthor"
+    ).textContent =
+        currentPost.author
+            ? `By ${currentPost.author}`
+            : "By DevSphere";
+
+    if (currentPost.createdAt) {
+
+        const date =
+            new Date(currentPost.createdAt);
+
+        document.getElementById(
+            "articleDate"
+        ).textContent =
+            date.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+    }
+
+    const category =
+        detectCategory(
+            currentPost.title,
+            currentPost.content
+        );
+
+    document.getElementById(
+        "articleCategory"
+    ).textContent =
+        category;
+
+    updateBookmarkButton();
+}
+
+
+function detectCategory(title, content) {
+
+    const text =
+        `${title} ${content}`.toLowerCase();
+
+    if (
+        text.includes("java") ||
+        text.includes("spring") ||
+        text.includes("backend")
+    ) return "Java";
+
+    if (
+        text.includes("javascript") ||
+        text.includes("html") ||
+        text.includes("css") ||
+        text.includes("web")
+    ) return "Web";
+
+    if (
+        text.includes("ai") ||
+        text.includes("artificial intelligence")
+    ) return "AI";
+
+    if (
+        text.includes("career") ||
+        text.includes("interview")
+    ) return "Career";
+
+    return "Ideas";
+}
+
+
+/* Bookmark */
+
+document
+    .getElementById("bookmarkArticle")
+    .addEventListener(
+        "click",
+        toggleBookmark
+    );
+
+
+function toggleBookmark() {
+
+    if (!currentPost) return;
+
+    let bookmarks =
+        JSON.parse(
+            localStorage.getItem(
+                "bookmarkedPosts"
+            ) || "[]"
+        );
+
+    if (bookmarks.includes(currentPost.id)) {
+
+        bookmarks =
+            bookmarks.filter(
+                id => id !== currentPost.id
+            );
+
+    } else {
+
+        bookmarks.push(currentPost.id);
+    }
+
+    localStorage.setItem(
+        "bookmarkedPosts",
+        JSON.stringify(bookmarks)
+    );
+
+    updateBookmarkButton();
+}
+
+
+function updateBookmarkButton() {
+
+    const button =
+        document.getElementById(
+            "bookmarkArticle"
+        );
+
+    const bookmarks =
+        JSON.parse(
+            localStorage.getItem(
+                "bookmarkedPosts"
+            ) || "[]"
+        );
+
+    if (
+        currentPost &&
+        bookmarks.includes(currentPost.id)
+    ) {
+
+        button.textContent =
+            "★ Saved";
+
+    } else {
+
+        button.textContent =
+            "☆ Save article";
+    }
+}
+
+
+/* Reading progress */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const scrollTop =
+            window.scrollY;
+
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress =
+            height > 0
+                ? (scrollTop / height) * 100
+                : 0;
+
+        document.getElementById(
+            "readingProgress"
+        ).style.width =
+            `${progress}%`;
+    }
+);
+
+</script>
+
+</body>
+</html>
